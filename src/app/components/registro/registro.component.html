@@ -1,0 +1,58 @@
+<header id="main-header" class="py-2 bg-info text-white">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <h1>
+          <i class="fas fa-user"></i> Registro
+        </h1>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="registro">
+  <div class="container">
+    <div class="wrapper">
+      <div class="row">
+        <div class="body">
+          <img class="logo" src="../../../assets/img/logos.jpg" alt="login">
+        </div>
+        <h4>Formulario de registro</h4>
+        <br>
+        <div *ngIf="!datosCorrectos" class="alert alert-warning" role="alert">
+          {{textoError}}
+        </div>
+        <form [formGroup]="registrarUsuario" (ngSubmit)="registro()">
+          <div class="form-floating mb-3">
+            <input type="email" class="form-control" id="email" formControlName="email" placeholder="name@example.com">
+            <label for="email">Email</label>
+            <div *ngIf="registrarUsuario.controls['email'].invalid && registrarUsuario.controls['email'].dirty"
+              class="alert alert-danger" role="alert">
+              <span *ngIf="registrarUsuario.get('email')?.hasError('required')">Correo es requerido</span>
+              <span *ngIf="registrarUsuario.get('email')?.hasError('email')">Correo no es válido</span>
+            </div>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="password" class="form-control" id="password" formControlName="password" placeholder="Password">
+            <label for="password">Password</label>
+            <div *ngIf="registrarUsuario.controls['password'].invalid && registrarUsuario.controls['password'].dirty"
+              class="alert alert-danger" role="alert">
+              <span *ngIf="registrarUsuario.get('password')?.hasError('required')">La contraseña es requerida</span>
+              <span *ngIf="registrarUsuario.get('password')?.hasError('minlength')">El password debe tener 6 caracteres</span>
+            </div>
+          </div>
+
+          <div class="form-floating mb-3">
+            <input type="password" class="form-control" id="repetirPassword" formControlName="repetirPassword" placeholder="Repetir Password">
+            <label for="password">Repetir Password</label>
+          </div>
+
+
+          <div class="d-grid gap-2">
+            <button type="submit" [disabled]="registrarUsuario.invalid" class="btn btn-primary btn-lg">Ingresar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
